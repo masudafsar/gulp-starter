@@ -23,6 +23,7 @@
     "gulp-connect": "^5.0.0",
     "gulp-ejs": "^3.0.1",
     "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
     "gulp-util": "^3.0.8"
   }
 }
