@@ -18,7 +18,10 @@
   "homepage": "https://github.com/masudafsar/gulp-starter#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.0.0",
+    "gulp-ejs": "^3.0.1",
     "gulp-sass": "^3.1.0",
     "gulp-util": "^3.0.8"
   }
