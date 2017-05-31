@@ -13,7 +13,7 @@ gulp.task('default', [], function () {
     // write default tasks here
 });
 
-gulp.task('server', ['watch'], function () {
+gulp.task('server', ['build', 'watch'], function () {
     connect.server({
         root: './',
         livereload: true
@@ -42,25 +42,14 @@ gulp.task('build:html', [], function () {
         .pipe(ejs(null, null, {
             ext: '.html'
         }).on('error', gutil.log))
-        .pipe(gulp.dest('./demo'));
+        .pipe(gulp.dest('./demo'))
+        .pipe(connect.reload());
 });
 
-gulp.task('watch', [
-    'watch:css',
-    'watch:js',
-    'watch:html'
-]);
-
-gulp.task('watch:css', [], function () {
+gulp.task('watch', [], function () {
     gulp.watch('./src/scss/**/*.scss', ['build:css']);
-});
-
-gulp.task('watch:js', [], function () {
     gulp.watch('./src/js/**/*.js', ['build:js']);
-});
-
-gulp.task('watch:html', [], function () {
-    gulp.watch('./src/scss/**/*.ejs', ['build:html']);
+    gulp.watch('./pages/**/*.ejs', ['build:html']);
 });
 
 gulp.task('clean', [
@@ -69,11 +58,19 @@ gulp.task('clean', [
 ]);
 
 gulp.task('clean:demo', [], function () {
-    gulp.src('./demo/*', {read: false})
+    gulp.src([
+        './demo/*',
+        '!./demo/**/.keep'
+    ], {read: false})
         .pipe(clean());
 });
 
 gulp.task('clean:dist', [], function () {
-    gulp.src('./dist/', {read: false})
+    gulp.src([
+        './dist/css/*',
+        './dist/font/*',
+        './dist/js/*',
+        '!./dist/**/.keep'
+    ], {read: false})
         .pipe(clean());
 });
